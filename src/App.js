@@ -13,6 +13,8 @@ export default function App() {
 
  let  getData = (val) =>{
    
+if (val.length==5){
+
 
 
 	fetch(`http://ctp-zip-api.herokuapp.com/zip/${val}`)
@@ -31,6 +33,7 @@ export default function App() {
 		  console.log(error.message)
 	  })
 
+	}
 }
 return (
 
