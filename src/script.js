@@ -1,7 +1,19 @@
 
-import React from "react";
+
+import { useState } from "react";
 import "./style.css";
-export default function Navbar() {
+
+export default function Navbar({getData}) {
+ const [zip, setZip] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setZip(event.target.zipcode.value)
+    console.log(zip)
+    getData(zip)
+
+  }
+  
     return ( 
         <div>
     <nav>
@@ -10,8 +22,19 @@ export default function Navbar() {
         <li>Showing Locations</li>
         </ul>
     </nav>
+
      <div className="searchBar">Zip Code:
-    <input type="text" className="input"/>
+     <form onSubmit={handleSubmit}>
+    
+    <input  
+          type="text" 
+          name="zipcode"
+          placeholder="zip"
+          className="input"
+        //   onChange={handleSubmit}
+        />
+    <button >submit</button>
+     </form>
      </div>
         </div> 
     )
