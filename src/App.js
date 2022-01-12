@@ -8,24 +8,37 @@ export default function App() {
   	const [items, setItems] = useState([]);
 
 	useEffect(() => {
-    fetch("http://ctp-zip-api.herokuapp.com/zip/10016")
-      .then(res => res.json())
-      .then(
+ 
+  }, []);
+
+ let  getData = (val) =>{
+   
+
+
+	fetch(`http://ctp-zip-api.herokuapp.com/zip/${val}`)
+    .then(res => {
+		if (!res.ok) {
+			throw Error("error text")
+		}
+		return res.json()
+	})
+    .then(
         (result) => {
           setIsLoaded(true);
           setItems(result);
         },
-      )
-  }, []);
+      ).catch((error)=> {
+		  console.log(error.message)
+	  })
 
-
+}
 return (
 
 	<div>
-        <Navbar/> 
+        <Navbar getData={getData}/> 
         <ul>
 				{items.map(item => (
-       		<li key={item.id}> 
+       		<li key={item.RecordNumber}> 
         		State: {item.State} <br/>
         		City: {item.City} <br/>
         		Location:{item.Location} <br/>
